@@ -2,36 +2,30 @@
 // 中等
 // https://leetcode.cn/problems/add-two-numbers/description/
 
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
-    struct ListNode *dummy = malloc(sizeof(struct ListNode));
-    struct ListNode *p = dummy;
-    int curry = 0;
-    dummy->next = NULL;
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    int incBit = 0;
 
-    while(l1 || l2 || curry) {
-        int v1 = 0, v2 = 0;
-
+    struct ListNode dump = {0, NULL};
+    struct ListNode *cur = &dump;
+    while((l1 != NULL) || (l2 != NULL) || incBit) {
         if(l1) {
-            v1 = l1->val;
-            l1 = l1->next;
+            incBit += l1->val;
+            l1 = l1->next;    
         }
-        if(l2) {
-            v2 = l2->val;
-            l2 = l2->next;
-        }
-
-        int v = v1 + v2 + curry;
-        curry = v > 9 ? 1 : 0;
-        v = v % 10;
-        struct ListNode *node = malloc(sizeof(struct ListNode));
-        node->val = v;
-        node->next = NULL;
         
-        p->next = node;
-        p = p->next; 
+        if(l2) {
+            incBit += l2->val;
+            l2 = l2->next;    
+        }
+        
+        struct ListNode *node = (struct ListNode*)malloc(sizeof(struct ListNode));
+        node->val = incBit % 10;
+        node->next = NULL;
+        cur->next = node;
+        cur = cur->next;
+        incBit /= 10;
     }
-
-    return dummy->next;
+    return dump.next;
 }
 
 
