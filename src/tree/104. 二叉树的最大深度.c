@@ -1,6 +1,6 @@
 // https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/
-int depth = 0;
-int res = 0;
+int depth;
+int res;
 void traverse(struct TreeNode* root) {
     if(root == NULL) {
         return;
@@ -18,9 +18,20 @@ void traverse(struct TreeNode* root) {
 }
 
 int maxDepth(struct TreeNode* root) {
-    // bug? 必须再这里初始化为 0 , 不然case [1, null, 2] 的结果为3 
     depth = 0;
     res = 0;
     traverse(root);
     return res;
+}
+
+
+// 2 --------------------------------------------------------------
+int maxDepth(struct TreeNode* root) {
+    if(root == NULL) {
+        return 0;
+    }
+    int left = maxDepth(root->left) + 1;
+    int right = maxDepth(root->right) + 1;
+
+    return left > right ? left : right;
 }
