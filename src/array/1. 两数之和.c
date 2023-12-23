@@ -2,25 +2,19 @@
 // 简单
 // https://leetcode.cn/problems/two-sum/description/
 
-int* twoSum(int* nums, int numsSize, int target, int* returnSize){
-    if(NULL == nums || numsSize < 2 || NULL == returnSize) {
-        return NULL;
-    }
-
-    int left = 0, right = 1;
-    for(left = 0; left < numsSize - 1; left++) {
-        int num = target - nums[left];
-        for(right = left + 1; right < numsSize; right++) {
-            if(num == nums[right]) {
-                int *res =  malloc(sizeof(int) * 2);
-                res[0] = left;
-                res[1] = right;
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    for(int i = 0; i < numsSize; i++) {
+        int v = target - nums[i];
+        for(int j = i + 1; j < numsSize; j++) {
+            if(nums[j] == v) {
+                int *ret = malloc(sizeof(int) * 2);
+                ret[0] = i;
+                ret[1] = j;
                 *returnSize = 2;
-                return res;
+                return ret;
             }
         }
     }
-
     *returnSize = 0;
     return NULL;
 }
