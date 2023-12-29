@@ -1,5 +1,6 @@
-
+//https://leetcode.cn/problems/move-zeroes/description/
 void moveZeroes(int* nums, int numsSize) {
+    if(numsSize < 1) return;
     int left = 0, right = 0;
 
     while(right < numsSize) {
@@ -7,9 +8,10 @@ void moveZeroes(int* nums, int numsSize) {
             right++;
             continue;
         } 
-        nums[left++] = nums[right++];
+
+        int tmp = nums[right];
+        nums[right++] = nums[left];
+        nums[left++] = tmp;
     }
-    while(left < numsSize) {
-        nums[left++] = 0;
-    }
+ 
 }
