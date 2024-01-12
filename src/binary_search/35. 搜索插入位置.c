@@ -7,14 +7,14 @@ int searchInsert(int* nums, int numsSize, int target) {
     while(left <= right) {
         int mid = left + (right - left) / 2;
         int midValue = nums[mid];
-        if(midValue == target) {
+
+        if(target == midValue) {
             return mid;
         } else if(target > midValue) {
             left = mid + 1;
-        } else if(target < midValue) {
+        } else if (target < midValue) {
             right = mid - 1;
         }
     }
-
     return left;
 }
