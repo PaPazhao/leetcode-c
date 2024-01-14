@@ -42,3 +42,20 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
     slow->next = NULL;
     return head;
 }
+ 
+struct ListNode* deleteDuplicates(struct ListNode* head) {
+    if(NULL == head) { return NULL; }
+    struct ListNode dummp = {0, head};
+    struct ListNode *left = head, *right = head->next;
+
+    while(right) {
+        if(left->val == right->val) {
+            right = right->next;
+            continue;
+        }
+        left = left->next;
+        left->val = right->val;
+    }
+    left->next = NULL;
+    return dummp.next;
+}
