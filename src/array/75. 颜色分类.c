@@ -21,7 +21,23 @@ void sortColors(int* nums, int numsSize) {
         }
     } 
 }
+void sortColors(int* nums, int numsSize) {
+    int p0 = 0, p1 = 0;
 
+    for(int i = 0; i < numsSize; i++) {
+        if(nums[i] == 1) {
+            swapValue(nums + i, nums + p1);
+            p1++;
+        } else if(nums[i] == 0) {
+            swapValue(nums + i, nums + p0);
+            if(p0 < p1) {
+                swapValue(nums + i, nums + p1);
+            }
+            p0++;
+            p1++;
+        }
+    } 
+}
 void sortColors(int* nums, int numsSize) {
     int index = 0;
 
